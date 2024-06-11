@@ -9,8 +9,11 @@ pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("GERM")
 
+# To adjust the speed of the game (60 frames per second)
+clock = pygame.time.Clock()
+
 # Creation of the main character object 
-main_character = Main_Character(50, 50, 5, 5, RED, screen)
+main_character = Main_Character(50, 50, main_character_size, main_character_size, RED, screen)
 
 small_enemy_collection = []
 for i in range(100):
@@ -36,21 +39,23 @@ while gameloop:
     main_character.draw()
     
     # Draw the enemy
-    for i in range(len(small_enemy_collection)):
-        small_enemy_collection[i].draw()
-    for i in range(len(medium_enemy_collection)):
-        medium_enemy_collection[i].draw()
-    for i in range(len(large_enemy_collection)):
-        large_enemy_collection[i].draw()
-        
-        
-        
+    for enemy in small_enemy_collection + medium_enemy_collection + large_enemy_collection:
+        enemy.draw()
         
         
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gameloop = False
 
+    # Check for collision between the main character and the enemy
+    for enemy in small_enemy_collection + medium_enemy_collection + large_enemy_collection:
+        if main_character.collision(enemy):
+            main_character_size += 1
+            main_character = Main_Character(50, 50, main_character_size, main_character_size, RED, screen)
+            
+
+
+    # key press events that allow for the button to be held down
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         main_character.x -= 5
@@ -63,5 +68,6 @@ while gameloop:
                 
 
     pygame.display.update()
+    clock.tick(60)
 
 pygame.quit()

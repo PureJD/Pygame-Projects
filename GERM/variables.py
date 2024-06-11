@@ -8,3 +8,5 @@ YELLOW = (255, 255, 0)
 
 # Set up the screen
 WIDTH, HEIGHT = 2200, 1200
+
+main_character_size = 5

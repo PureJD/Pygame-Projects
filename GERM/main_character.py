@@ -11,3 +11,8 @@ class Main_Character:
 
     def draw(self):
         pygame.draw.rect(self.screen, self.color, (self.x, self.y, self.width, self.height))
+    
+    def collision(self, enemy):
+        if self.x < enemy.x + enemy.width and self.x + self.width > enemy.x and self.y < enemy.y + enemy.height and self.y + self.height > enemy.y:
+            return True
+        return False
