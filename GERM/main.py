@@ -51,16 +51,16 @@ while gameloop:
         if event.type == pygame.QUIT:
             gameloop = False
 
-        # Movement of the character
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                main_character.x -= 5
-            if event.key == pygame.K_RIGHT:
-                main_character.x += 5
-            if event.key == pygame.K_UP:
-                main_character.y -= 5
-            if event.key == pygame.K_DOWN:
-                main_character.y += 5
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        main_character.x -= 5
+    if keys[pygame.K_RIGHT]:
+        main_character.x += 5
+    if keys[pygame.K_UP]:
+        main_character.y -= 5
+    if keys[pygame.K_DOWN]:
+        main_character.y += 5
+                
 
     pygame.display.update()
 
